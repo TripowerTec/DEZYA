@@ -1,0 +1,67 @@
+<div class="accountpage">
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <img src="assets/homepage.jpg" alt="" width="100%">
+            </div>
+            <div class="col-2">
+                <div class="form-container">
+                    <h2>Login</h2>
+<!-- <form [formGroup]="loginForm" (ngSubmit)="onSubmit()"> -->
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="username">Email</label>
+        <input type="text" formControlName="Email" class="form-control" />
+        
+    </div>
+    <div class="form-group">
+        <label for="password">password</label>
+        <input type="password" formControlName="Password" class="form-control"/>
+        
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary">Login</button>
+        
+        <a [routerLink]="['/regpage']" class="btn btn-link">Register</a>
+    </div>
+
+    <div class="form-group">
+        
+        
+        <a class="btn btn-link forgotpass" (click)="open(mymodal)">Forgot Password?</a>
+    </div>
+</form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!------   Forgot Passwor   ------->
+<ng-template #mymodal let-modal let-c="close" let-d="dismiss">
+    <div class="modal-header pb-1">
+      <h4 class="modal-title text-center font-weight-bold" id="modal-basic-title">Forgot password</h4>
+      <button type="button" class="close pb-1 outLineNone" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+<div class="modal-body border-bottom-none">
+    <div class="forgetPwdContainer">
+     <p class="text-center">Please enter the Email id/Phone number you used at the time of registration to get the password reset instructions.</p>
+     <form [formGroup]="forgotPasswordForm">
+         <div class="form-group">
+             <input type="text" formControlName="Email" class="form-control" placeholder="Email" />
+             
+         </div>
+         <div class="form-group">
+             <button type="submit" [disabled]="loading" class="btn btn-primary loginBtn w-100" (click) = "onForgotSubmit()" >Submit</button>
+         </div>
+     </form>
+    </div>
+ </div>
+
+
+</ng-template>
+<!---Forgot Password End-->
