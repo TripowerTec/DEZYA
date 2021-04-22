@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule  } from '@angul
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { UserService } from '../_services/user.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NotificationService } from '../_services/notification.service';
+import { ConfirmedValidator  } from '../confirmed.validator';
 
 @Component({
   selector: 'app-accountpage',
@@ -12,16 +14,25 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 export class AccountpageComponent implements OnInit {
   loginForm: FormGroup;
   forgotPasswordForm: FormGroup;
- 
-  constructor(private formBuilder: FormBuilder, private modalService: NgbModal, private toastr: ToastrService, private userService: UserService) { 
+  resetPasswordForm: FormGroup;
+  loginSubmit = false;
+  submitForgetPwd =false;
+  resetPwd = false;
+  constructor(private formBuilder: FormBuilder, private notifyService : NotificationService, private modalService: NgbModal, private toastr: ToastrService, private userService: UserService) { 
     this.loginForm = this.formBuilder.group({
-      Email: [null, Validators.required],
-      
-      Password: [null, [Validators.required]],
-     
+      Email: ['', [Validators.required, Validators.email]],
+      Password: ['', [Validators.required, Validators.minLength(6)]],
     });
     this.forgotPasswordForm = this.formBuilder.group({
-      Email: ['', Validators.required]
+      Email: ['', [Validators.required,Validators.email]]
+    });
+    this.resetPasswordForm = this.formBuilder.group({
+      Email: ['', [Validators.required, Validators.email]],
+      Password: ['', [Validators.required, Validators.minLength(6)]],
+      ConfirmPassword: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      OTP: ['', [Validators.required]],
+    },
+    {validator: ConfirmedValidator('Password', 'ConfirmPassword')
     });
   }
 
@@ -33,80 +44,76 @@ export class AccountpageComponent implements OnInit {
 
    onSubmit() {
      debugger;
-     // this.contactSubmit = true;
-     // if (this.contactForm.invalid) {
-     //   return;
-     // }
+     this.loginSubmit = true;
+    
+     if (this.loginForm.invalid) {
+       return;
+     }
+     
      const loginDetail = {
        "userid": this.loginForm.value.Email,
        "password": this.loginForm.value.Password,
-    
-       
-     
      }
      console.log(this.loginForm.value);
      this.userService.logdetails(loginDetail).subscribe(
        
        (data: any) => {
-         //this.notifyService.contactToast(data);
- 
-         
-         debugger;
-         if (data.httpStatus === 200) {
-           this.toastr.success(data.message, 'Success Message', {
-             timeOut: 5000,
-           });
-           //this.router.navigate(['/login']);
-          // this.modalService.dismissAll();
-         } else {
-           this.toastr.error(data.message, 'Registration Error', {
-             timeOut: 5000,
-           });
-         }
+        
+        this.notifyService.showToast(data);
          
        }, error => {
  
-         // this.loading = false;
-         
        });
-
-       
- 
-   }
- 
+   
+  }
    open(content) {
     this.modalService.open(content);
   }
-  //get forgotFrom() { return this.forgotPasswordForm.controls; }
 
-  onForgotSubmit() {
-   // this.submitForgetPwd = true;
-    // if (this.forgotPasswordForm.invalid) {
-    //   return;
-    // }
-    const forgotpwdDetail = {
-      "userid": this.loginForm.value.Email,
-      //"password": this.loginForm.value.Password,
-   
-      
-    
+  get fp() { return this.forgotPasswordForm.controls; }
+
+  onForgotSubmit(otpMethod) {
+    debugger;
+    this.submitForgetPwd = true;
+    if (this.forgotPasswordForm.invalid) {
+      return;
     }
-    this.userService.forgotPassword(forgotpwdDetail)
-      .subscribe(
+    
+    const forgotpwdDetail = {
+      "userid": this.forgotPasswordForm.value.Email,
+    }
+    this.userService.forgotPassword(forgotpwdDetail).subscribe(
+      
         (data: any) => {
-          if (data.httpStatus === 200) {
-            this.toastr.success(data.message, 'Forgot Password', {
-              timeOut: 3000,
-            });
-            this.modalService.dismissAll();
-          } else {
-            this.toastr.error(data.message, 'Forgot Password', {
-              timeOut: 3000,
-            });
-
-          }
+        this.notifyService.showToast(data);
+        this.modalService.open(otpMethod);
+          
         }, error => {
-          // this.alertService.error(error);         
+                  
         });
-  }
+  
+}
+  //OTP submit
+  get s() { return this.resetPasswordForm.controls; }
+  onotpSubmit() {
+    this.resetPwd = true;
+    if (this.resetPasswordForm.invalid) {
+      return;
+    }
+     const otpDetail = {
+       "userid": this.resetPasswordForm.value.Email,
+       "password": this.resetPasswordForm.value.Password,
+       "otp": this.resetPasswordForm.value.OTP,
+   
+     }
+     this.userService.resetPassword(otpDetail)
+       .subscribe(
+         (data: any) => {
+          this.notifyService.showToast(data);
+             this.modalService.dismissAll();
+          
+         }, error => {
+           // this.alertService.error(error);         
+         });
+   }
 }

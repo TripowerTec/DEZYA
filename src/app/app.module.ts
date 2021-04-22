@@ -74,7 +74,11 @@ const pad = (i: number): string => i < 10 ? `0${i}` : `${i}`;
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot(
+      {
+        positionClass:'toast-center-center',
+      }
+    ),
     HttpClientModule,
     BrowserAnimationsModule,
     NgbModule

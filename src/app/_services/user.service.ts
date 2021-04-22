@@ -30,6 +30,10 @@ const httpOptions = {
 
     forgotPassword(params): Observable<any> {
       debugger;
-      return this.http.post<any>(apiURL + `/api/users/add`, params, httpOptions).pipe(tap());
+      return this.http.post<any>(apiURL + `api/user/forgetpassword`, params, httpOptions).pipe(tap());
+    }
+    resetPassword(params): Observable<any> {
+      debugger;
+      return this.http.post<any>(apiURL + `api/user/resetpassword`, params, httpOptions).pipe(tap());
     }
 }
