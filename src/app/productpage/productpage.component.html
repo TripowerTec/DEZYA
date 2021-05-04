@@ -1,0 +1,52 @@
+<div class="productpage">
+<div class="container">
+    <div class="row">  
+        <div class="col-md-4">
+         <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="row">
+                        <div class="col">
+                            
+                            </div>
+                            <!-- <div class="img" *ngFor = "let item of prodetails.subproduct">  -->
+                                <img src="{{url}}" alt="Card image cap" style="width:100%" class="rounded mx-auto d-block img-responsive mt-3">
+                                <!-- <h6 class="card-title font-weight-bold">{{prodetails.name}}</h6>
+                                <p class="card-text"><b>Price</b><small> {{prodetails.price}} </small></p>  -->
+                                <!-- <p class="card-text"><b>Id</b><small> {{prodetails.id}} </small></p> -->
+                        <!-- </div> -->
+                        
+                    </div>
+                    <div class="row"> 
+                        <!-- <div class="row"> -->
+                        <div class="col-sm" width="10px"  *ngFor = "let card of prodetails.picture">
+                                <!-- <div class="cardb"> -->
+                                    <img src="{{card.pic}}" (click)="mouseEnter($event)" (mouseleave)="mouseLeave($event)"  alt="Card image cap" style="width:100%" class="rounded mx-auto d-block img-responsive mt-3">
+                                    <!-- <div class="cardb-body">
+                                    </div> -->
+                                <!-- </div> -->
+                        </div>
+                        <!-- </div> -->
+                    </div> 
+                </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    
+   
+
+    <!-- <div class="row"> 
+        <div class="col-sm" width="10px"  *ngFor = "let card of prodetails.picture">
+            <img src="{{card.pic}}" alt="Card image cap" style="width:100%" class="rounded mx-auto d-block img-responsive mt-3">
+        </div>
+    </div>   -->
+        
+    
+  
+
+    
+
+    
+
+</div>

@@ -36,4 +36,13 @@ const httpOptions = {
       debugger;
       return this.http.post<any>(apiURL + `api/user/resetpassword`, params, httpOptions).pipe(tap());
     }
+    getHomeProductList(): Observable<any> {
+      debugger;
+      return this.http.get<any>(apiURL + `api/product/callallproducts/1`, httpOptions).pipe(tap());
+    }
+    getProductList(params): Observable<any> {
+      debugger;
+      return this.http.get<any>(apiURL + `api/product/callproduct/`+params, httpOptions).pipe(tap());
+    }
+
 }

@@ -5,6 +5,7 @@ import { UserService } from '../_services/user.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationService } from '../_services/notification.service';
 import { ConfirmedValidator  } from '../confirmed.validator';
+import { Router, ActivatedRoute  } from '@angular/router';
 
 @Component({
   selector: 'app-accountpage',
@@ -18,7 +19,7 @@ export class AccountpageComponent implements OnInit {
   loginSubmit = false;
   submitForgetPwd =false;
   resetPwd = false;
-  constructor(private formBuilder: FormBuilder, private notifyService : NotificationService, private modalService: NgbModal, private toastr: ToastrService, private userService: UserService) { 
+  constructor(private formBuilder: FormBuilder, private router: Router, private notifyService : NotificationService, private modalService: NgbModal, private toastr: ToastrService, private userService: UserService) { 
     this.loginForm = this.formBuilder.group({
       Email: ['', [Validators.required, Validators.email]],
       Password: ['', [Validators.required, Validators.minLength(6)]],
@@ -58,9 +59,11 @@ export class AccountpageComponent implements OnInit {
      this.userService.logdetails(loginDetail).subscribe(
        
        (data: any) => {
-        
-        this.notifyService.showToast(data);
-         
+        if (data.Status === 200) {
+          this.notifyService.showToast(data);
+          this.router.navigate(['homepage']);
+        }
+       
        }, error => {
  
        });

@@ -13,6 +13,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule, NgbCalendar, NgbTimeStruct, NgbTimeAdapter, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { ProductpageComponent } from './productpage/productpage.component';
 
 
 export class CustomDateParserFormatter extends NgbDateParserFormatter {
@@ -66,7 +67,8 @@ const pad = (i: number): string => i < 10 ? `0${i}` : `${i}`;
     HomepageComponent,
     FooterpageComponent,
     AccountpageComponent,
-    RegisterpageComponent
+    RegisterpageComponent,
+    ProductpageComponent
   ],
   imports: [
     BrowserModule,
