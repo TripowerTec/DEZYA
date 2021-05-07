@@ -44,11 +44,11 @@ export class RegisterpageComponent implements OnInit {
     debugger;
    
     const contactDetail = {
-      "userid": this.RegForm.value.Userid,
-      "password": this.RegForm.value.Password,
-      "name": this.RegForm.value.Name,
-      "mobile_no": this.RegForm.value.MobileNo,
-      "dob":this.RegForm.value.DOB,
+      "USER_ID": this.RegForm.value.Userid,
+      "PASSWORD": this.RegForm.value.Password,
+      "NAME": this.RegForm.value.Name,
+      "MOBILE_NUMBER": this.RegForm.value.MobileNo,
+      "DATE_OF_BIRTH":this.RegForm.value.DOB,
       
     
     }

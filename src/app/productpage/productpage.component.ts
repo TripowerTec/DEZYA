@@ -13,22 +13,19 @@ export class ProductpageComponent implements OnInit {
   cat_Id: any;
   images:any;
   subpdts:any;
-  url:any;
-  product:any;
+  PRIMARY_IMAGE:any;
+  productimagelist:any= [];
   constructor(private userService: UserService, private router: Router, private _Activatedroute:ActivatedRoute) { }
 
   ngOnInit(): void {
     debugger;
-    this.cat_Id = this._Activatedroute.snapshot.params['item.id'];
+    this.cat_Id = this._Activatedroute.snapshot.params['item.PRODUCT_ID'];
     console.log(this.cat_Id);
     this.getProductList();
   }
   getProductList() {
     debugger;
-   // const currentCatId: any = JSON.parse(sessionStorage.getItem('id'));
-    // const catDetails = {
-    //   "id": this.cat_Id
-    // };
+   
     this.userService.getProductList(this.cat_Id).subscribe(
       
       (data: any) => {
@@ -36,16 +33,31 @@ export class ProductpageComponent implements OnInit {
           //this.rowData = data.data;
           console.log(data);
           this.prodetails=data;
-          this.product=this.prodetails.subproduct;
-          console.log(this.product.url);
-          this.url=this.product.url;
-          //this.images=this.prodetails;
-         
+          this.PRIMARY_IMAGE=this.prodetails.PRIMARY_IMAGE;
+
+         // this.subpdts=this.prodetails.subproduct;
         }
-      }, error => {
-        // this.loading = false;
+        
       });
+      // for(let i=0;i<this.prodetails.subproduct.length;i++){
+      //   this.productimagelist.push({
+      //     imageURL:this.prodetails.subproduct.url,
+      
+      //   });
+      //   for(let i=0;i<this.prodetails.picture.length;i++){
+      //     this.productimagelist.push({
+      //       imageURL:this.prodetails.subproduct.pic,
+        
+      //     });
+      //   }
+      // }
+      //console.log(this.productimagelist);
   }
+  
+//merge objects
+
+
+
 
   mouseEnter(event){
     console.log(event);
@@ -53,7 +65,7 @@ export class ProductpageComponent implements OnInit {
     var idAttr = target.attributes.src;
     var value = idAttr.nodeValue;
     console.log(value)
-    this.url = value ; //I have binded thisvariable in HTML
+    this.PRIMARY_IMAGE = value ; //I have binded thisvariable in HTML
   }
 
   mouseLeave(ev){

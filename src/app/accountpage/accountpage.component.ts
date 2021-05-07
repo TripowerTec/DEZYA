@@ -52,14 +52,14 @@ export class AccountpageComponent implements OnInit {
      }
      
      const loginDetail = {
-       "userid": this.loginForm.value.Email,
-       "password": this.loginForm.value.Password,
+       "USER_ID": this.loginForm.value.Email,
+       "PASSWORD": this.loginForm.value.Password,
      }
      console.log(this.loginForm.value);
      this.userService.logdetails(loginDetail).subscribe(
        
        (data: any) => {
-        if (data.Status === 200) {
+        if (data.STATUS === "200") {
           this.notifyService.showToast(data);
           this.router.navigate(['homepage']);
         }
@@ -83,7 +83,7 @@ export class AccountpageComponent implements OnInit {
     }
     
     const forgotpwdDetail = {
-      "userid": this.forgotPasswordForm.value.Email,
+      "USER_ID": this.forgotPasswordForm.value.Email,
     }
     this.userService.forgotPassword(forgotpwdDetail).subscribe(
       
@@ -104,9 +104,9 @@ export class AccountpageComponent implements OnInit {
       return;
     }
      const otpDetail = {
-       "userid": this.resetPasswordForm.value.Email,
-       "password": this.resetPasswordForm.value.Password,
-       "otp": this.resetPasswordForm.value.OTP,
+       "USER_ID": this.resetPasswordForm.value.Email,
+       "PASSWORD": this.resetPasswordForm.value.Password,
+       "OTP": this.resetPasswordForm.value.OTP,
    
      }
      this.userService.resetPassword(otpDetail)

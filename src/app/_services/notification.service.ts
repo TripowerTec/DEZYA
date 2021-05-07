@@ -11,14 +11,14 @@ export class NotificationService {
   constructor(private toastr: ToastrService,private modalService: NgbModal,  private router: Router,) { }
   showToast(data){
    debugger;
-        if (data.Status === 200) {
-          this.toastr.success(data.Message, 'Success Message', {
+        if (data.STATUS === "200") {
+          this.toastr.success(data.MESSAGE, 'Success Message', {
             timeOut: 5000,
           });
           //this.router.navigate(['/login']);
           this.modalService.dismissAll();
         } else {
-          this.toastr.error(data.Message, 'Registration Error', {
+          this.toastr.error(data.MESSAGE, 'Registration Error', {
             timeOut: 5000,
           });
         }
