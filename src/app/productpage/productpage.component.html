@@ -3,8 +3,9 @@
         <div class="row">  
             <div class="card">
                 <div class="row">
-                    <div class="col-sm-2">
-                        <div class="listimage"  *ngFor = "let card of prodetails.PICTURE">
+                    <div class="col-sm-2 scroller" #scroller1>
+                        
+                        <div class="listimage" *ngFor = "let card of prodetails.PICTURE">
                             <img src="{{card.PICTURE}}" (click)="mouseEnter($event)" (mouseleave)="mouseLeave($event)"  alt="Card image cap" style="width:100%" class="rounded mx-auto d-block img-responsive mt-3">
                         </div>
                        

@@ -1,6 +1,6 @@
 <div class="maincontainer">
-   <div class="row">
-    <div class="col-2">
+   
+    <!-- <div class="col-2">
         <h1>Give Your Workout <br>A New Style!</h1>
         <p>Success isnot always about greatness. Its about consistency. Consistent <br>hard work gains success. Greatness will come.</p>
         <a href="" class="btn">Explore Now &#8594;</a>
@@ -8,27 +8,77 @@
     <div class="col-2">
         <img class="img-fluid"  src="assets/homepage.jpg" alt="">
        
-    </div>
-   </div>
+    </div> -->
+    
+    <div class="bannercontainer">
+        
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-100" src="assets/bannerimage1.jpg" alt="First slide">
+          </div>
+         
+        </div>
+        
+     
+      </div>
+      </div>
+
+
+
+
+   
 
    <!----Featured Products-->
-<div class="small-container">
-    <h1 style="color: blue;">Kurtas Sets</h1>  
-    <div class="row">
+
+
+   
+<mdb-carousel [isControls]="true" class="carousel-multi-item multi-animation" [type]="'carousel-multi-item'"[animation]="'slide'">
+    <mdb-carousel-item *ngFor="let item of slides; let i = index">
+        <div class="col-md-4" *ngFor="let card of item">
+            <mdb-card>
+                <mdb-card-img [src]="card.PRIMARY_IMAGE"alt="Card image cap" [routerLink]="['/productpage', card.PRODUCT_ID]" alt="Card image cap" style="width:100%" class="rounded mx-auto d-block img-responsive mt-3">
+
+                </mdb-card-img>
+                <mdb-card-body>
+                    <mdb-card-title>
+                        <h4>{{card.NAME}}</h4>
+
+                    </mdb-card-title>
+                    <p>{{card.PRICE}}</p>
+                </mdb-card-body>
+            </mdb-card>
+        </div>
+    </mdb-carousel-item>
+</mdb-carousel>
+
+
+
+
+
+
+
+
+
+
+   
+
+
+    <!-- <div class="row">
         
-        <div class="col-md-4"  *ngFor = "let item of allprdts">
+        <div class="col-sm-3"  *ngFor = "let item of allprdts">
             <div class="card">
                 <img src="{{item.PRIMARY_IMAGE}}" [routerLink]="['/productpage', item.PRODUCT_ID]" alt="Card image cap" style="width:100%" class="rounded mx-auto d-block img-responsive mt-3">
                 <div class="card-body">
                     <h6 class="card-title font-weight-bold">{{item.NAME}}</h6>
                     <p class="card-text"><b>Price</b><small> {{item.PRICE}} </small></p> 
-                    <!-- <p class="card-text"><b>Id</b><small> {{item.Id}} </small></p> -->
-
+                   
                 </div>
-            </div>
+            </div>  
            
         </div>
-    </div>
+    </div> -->
     
 
 </div>

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service';
 import { Router, ActivatedRoute  } from '@angular/router';
 
+
+
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
@@ -10,6 +12,7 @@ import { Router, ActivatedRoute  } from '@angular/router';
 export class HomepageComponent implements OnInit {
   allprdts : any;
   imageURL:string ;
+  slides:any= [ [] ];
   constructor(private userService: UserService) { 
      
   }
@@ -17,7 +20,13 @@ export class HomepageComponent implements OnInit {
   ngOnInit(): void {
     debugger;
     this.getHomeProductList();
+    
+
+   
   }
+
+
+
 
   getHomeProductList() {
     debugger;
@@ -29,6 +38,7 @@ export class HomepageComponent implements OnInit {
           //this.rowData = data.data;
           console.log(data);
           this.allprdts=data;
+          this.slides = this.chunk(this.allprdts, 3);
          // this.catId = data.id;
          
         }
@@ -37,5 +47,23 @@ export class HomepageComponent implements OnInit {
       });
   }
 
+
+ 
+
+chunk(arr, chunkSize) {
+
+let R= [];
+
+for (let i=0, len=arr.length; i<len; i+=chunkSize) {
+
+R.push(arr.slice(i, i+chunkSize));
+
+}
+
+return R;
+
+}
+ 
+  
 
 }

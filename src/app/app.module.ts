@@ -14,7 +14,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule, NgbCalendar, NgbTimeStruct, NgbTimeAdapter, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ProductpageComponent } from './productpage/productpage.component';
-
+import { OwlModule } from 'ngx-owl-carousel';
+import { CarouselDirective } from './carousel.directive';
+import { MDBBootstrapModulesPro } from 'ng-uikit-pro-standard';
+import { ScrollableItemDirective } from './scrollable-item.directive';
+// import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 export class CustomDateParserFormatter extends NgbDateParserFormatter {
 
@@ -68,7 +72,9 @@ const pad = (i: number): string => i < 10 ? `0${i}` : `${i}`;
     FooterpageComponent,
     AccountpageComponent,
     RegisterpageComponent,
-    ProductpageComponent
+    ProductpageComponent,
+    CarouselDirective,
+    ScrollableItemDirective
   ],
   imports: [
     BrowserModule,
@@ -76,6 +82,7 @@ const pad = (i: number): string => i < 10 ? `0${i}` : `${i}`;
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    OwlModule,
     ToastrModule.forRoot(
       {
         positionClass:'toast-center-center',
@@ -83,12 +90,16 @@ const pad = (i: number): string => i < 10 ? `0${i}` : `${i}`;
     ),
     HttpClientModule,
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
+    MDBBootstrapModulesPro
   ],
   providers: [
     {provide: NgbDateAdapter, useClass: CustomAdapter},
     {provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter},
   ],
+
+  // schemas: [ NO_ERRORS_SCHEMA ],
+  
   bootstrap: [AppComponent]
 })
 

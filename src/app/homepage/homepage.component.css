@@ -5,12 +5,14 @@ margin:auto;
 padding-left: 25px;
 padding-right: 25px;
 }
+.bannercontainer{
+    max-width: 1700px;
+   
+}
 
 .row{
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap; 
-    justify-content: space-around;
+    max-width: 1700px;
+    
 }
 .col-2{
     flex-basis: 50%;
@@ -141,4 +143,14 @@ ul{
   
   .productimage {
     padding: 2px 16px;
+  }
+
+  p {
+    font-family: Lato;
+  }
+  
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-color: black;
+    border-radius: 20%;
   }

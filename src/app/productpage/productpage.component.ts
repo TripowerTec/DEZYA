@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DiagnosticCategory } from 'typescript';
 import { UserService } from '../_services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -9,6 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./productpage.component.css']
 })
 export class ProductpageComponent implements OnInit {
+  @ViewChild('scroller1') scroller: ElementRef;
   prodetails : any;
   cat_Id: any;
   images:any;
@@ -19,9 +20,16 @@ export class ProductpageComponent implements OnInit {
 
   ngOnInit(): void {
     debugger;
-    this.cat_Id = this._Activatedroute.snapshot.params['item.PRODUCT_ID'];
+    this.cat_Id = this._Activatedroute.snapshot.params['card.PRODUCT_ID'];
     console.log(this.cat_Id);
     this.getProductList();
+    const div = this.scroller.nativeElement as HTMLDivElement;
+    div.addEventListener('mouseover', e => {
+      console.log('Mouse Over');
+    });
+    div.addEventListener('mouseout', e => {
+      console.log('Mouse Out');
+    });
   }
   getProductList() {
     debugger;
